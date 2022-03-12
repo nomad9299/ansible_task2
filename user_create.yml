@@ -1,0 +1,29 @@
+#to start this playbook you have to write ansible-playbook --ask-vault-pass "pass=2509"
+
+---
+  - hosts: all
+    vars_files:
+    - ./host_vars/vault.yml
+    become: true
+    tasks:
+   
+       - name: add user Alice
+         tags: always
+         user:
+          name: alice
+          password: "{{alice_pass}}"
+          groups: root
+
+       - name: add user Bob
+         tags: always
+         user:
+          name: bob
+          password: "{{bob_pass}}"
+          group: root
+   
+       - name: add user Carol
+         tags: always
+         user:
+          name: carol
+          password: "{{carol_pass}}"
+          group: root
